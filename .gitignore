@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+AMS_ssm_dao/src/
+AMS_ssm_domain/src/
+AMS_ssm_service/src/
+AMS_ssm_utils/src/
+AMS_ssm_web/src/main/resources/
+src/
