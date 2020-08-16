@@ -11,6 +11,6 @@ public class Product {
     private String departureTimeStr;
     private double productPrice; // 产品价格
     private String productDesc; // 产品描述
-    private Integer productStatus; // 状态 0 关闭 1 开启
+    private Integer productStatus; // 产品状态 0 关闭 1 开启
     private String productStatusStr;
 }
