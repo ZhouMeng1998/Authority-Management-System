@@ -20,7 +20,12 @@ public class ProductController {
         ModelAndView mv = new ModelAndView();
         List<Product> products = service.findAll();
         mv.addObject("productList", products);
-        mv.setViewName("product-list");
+        mv.setViewName("product-list1");
         return mv;
+    }
+    @RequestMapping("/save.do")
+    public String save(Product product)throws Exception{
+        service.save(product);
+        return "redirect:findAll.do";
     }
 }
