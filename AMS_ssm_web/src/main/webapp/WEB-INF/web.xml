@@ -6,7 +6,7 @@
          <!-- 1ssm整合，读取spring的配置文件-->
          <context-param>
            <param-name>contextConfigLocation</param-name>
-           <param-value>classpath*:applicationContext.xml</param-value>
+           <param-value>classpath*:applicationContext.xml, classpath*:spring-security.xml</param-value>
          </context-param>
          <!-- 2配置Listener，监听Request的创建-->
          <listener>
@@ -42,16 +42,15 @@
            <filter-name>characterEncodingFilter</filter-name>
            <url-pattern>/*</url-pattern>
          </filter-mapping>
-         <!-- 5配置委派过滤器(暂时还不知道有什么用，先复制过来)-->
-<!--        <filter>-->
-<!--          <filter-name>springSecurityFilterChain</filter-name>-->
-<!--          <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-<!--        </filter>-->
-<!--        <filter-mapping>-->
-<!--          <filter-name>springSecurityFilterChain</filter-name>-->
-<!--          <url-pattern>/*</url-pattern>-->
-<!--        </filter-mapping>-->
-
+         <!-- 5配置spring-security-->
+        <filter>
+            <filter-name>springSecurityFilterChain</filter-name>
+            <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        </filter>
+        <filter-mapping>
+            <filter-name>springSecurityFilterChain</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
         <welcome-file-list>
           <welcome-file>index.html</welcome-file>
           <welcome-file>index.htm</welcome-file>
