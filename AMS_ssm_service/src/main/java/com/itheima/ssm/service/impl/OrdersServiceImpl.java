@@ -23,4 +23,14 @@ public class OrdersServiceImpl implements IOrdersService {
         PageHelper.startPage(page, size);
         return dao.findAll();
     }
+
+    /**
+     * 查询订单详情
+     * @param id
+     * @return
+     */
+    @Override
+    public Orders findById(String id) throws Exception {
+        return dao.findById(id);
+    }
 }
