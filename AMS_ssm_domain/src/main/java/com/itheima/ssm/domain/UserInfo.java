@@ -61,6 +61,11 @@ public class UserInfo {
     }
 
     public String getStatusStr() {
+        if(status == 0){
+            statusStr = "Unauthorized";
+        }else{
+            statusStr = "authorized";
+        }
         return statusStr;
     }
 
