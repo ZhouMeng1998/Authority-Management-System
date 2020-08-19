@@ -42,5 +42,6 @@ public class UserServiceImpl implements IUserService {
             authorities.add(new SimpleGrantedAuthority("ROLE_"+roleName));
         }
         return authorities;
+        //test wakatime;
     }
 }
