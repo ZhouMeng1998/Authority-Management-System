@@ -44,4 +44,9 @@ public class UserServiceImpl implements IUserService {
         return authorities;
         //test wakatime;
     }
+
+    @Override
+    public List<UserInfo> findAll() throws Exception{
+        return dao.findAll();
+    }
 }

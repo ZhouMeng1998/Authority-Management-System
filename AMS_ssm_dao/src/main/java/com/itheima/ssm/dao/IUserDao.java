@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface IUserDao {
     @Select("select * from users where username = #{username}")
@@ -21,4 +23,7 @@ public interface IUserDao {
             @Result(column = "id", property = "roles",javaType = java.util.List.class, many=@Many(select = "com.itheima.ssm.dao.IRoleDao.findByUserId"))
     })
     public UserInfo findByUsername(String username) throws Exception;
+
+    @Select("select * from users")
+    List<UserInfo> findAll() throws Exception;
 }
