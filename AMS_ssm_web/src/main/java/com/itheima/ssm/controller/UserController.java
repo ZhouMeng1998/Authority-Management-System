@@ -5,10 +5,12 @@ import com.itheima.ssm.domain.UserInfo;
 import com.itheima.ssm.service.IUserService;
 import com.itheima.ssm.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -20,6 +22,14 @@ public class UserController {
      * 查询所有用户
      * @return
      */
+
+
+    @RequestMapping("/save.do")
+    public String save(UserInfo info) throws Exception{
+        service.save(info);
+        return "redirect:findAll.do";
+    }
+
     @RequestMapping("/findAll.do")
     public ModelAndView findAll() throws Exception{
         ModelAndView mv = new ModelAndView();

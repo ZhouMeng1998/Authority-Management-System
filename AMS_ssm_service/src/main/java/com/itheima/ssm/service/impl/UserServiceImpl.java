@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,10 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserDao dao;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("进入此方法");
@@ -30,7 +35,7 @@ public class UserServiceImpl implements IUserService {
             e.printStackTrace();
         }
         List<Role> roles = userInfo.getRoles();
-        User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(),
+        User user = new User(userInfo.getUsername(), bCryptPasswordEncoder.encode( userInfo.getPassword()),
                 userInfo.getStatus() == 0 ? false : true, true, true, true,
                 getAuthorities(roles));
         return user;
@@ -41,12 +46,16 @@ public class UserServiceImpl implements IUserService {
             String roleName = role.getRoleName();
             authorities.add(new SimpleGrantedAuthority("ROLE_"+roleName));
         }
-        return authorities;
-        //test wakatime;
-    }
+        return authorities; }
 
     @Override
     public List<UserInfo> findAll() throws Exception{
         return dao.findAll();
+    }
+
+    @Override
+    public void save(UserInfo info) throws Exception{
+        info.setPassword(bCryptPasswordEncoder.encode(info.getPassword()));
+        dao.save(info);
     }
 }
