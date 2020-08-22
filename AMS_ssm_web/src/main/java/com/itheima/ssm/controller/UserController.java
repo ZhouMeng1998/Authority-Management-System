@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,15 @@ public class UserController {
         List<UserInfo> userList = service.findAll();
         mv.addObject("userList", userList);
         mv.setViewName("user-list");
+        return mv;
+    }
+
+    @RequestMapping("/findById.do")
+    public ModelAndView findById(String id) throws Exception{
+        ModelAndView mv = new ModelAndView();
+        UserInfo user = service.findById(id);
+        mv.addObject("user", user);
+        mv.setViewName("user-show");
         return mv;
     }
 }
