@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class UserController {
     }
 
     @RequestMapping("/findAll.do")
+    @RolesAllowed("USER")
     public ModelAndView findAll() throws Exception{
         ModelAndView mv = new ModelAndView();
         List<UserInfo> userList = service.findAll();
