@@ -1,5 +1,6 @@
 package com.itheima.ssm.service.impl;
 
+import com.itheima.ssm.dao.IRoleDao;
 import com.itheima.ssm.dao.IUserDao;
 import com.itheima.ssm.domain.Role;
 import com.itheima.ssm.domain.UserInfo;
@@ -25,6 +26,8 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private IRoleDao roleDao;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("进入此方法");
@@ -62,5 +65,17 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserInfo findById(String id) throws Exception{
         return dao.findById(id);
+    }
+
+    @Override
+    public List<Role> findOtherRoles(String userId) throws Exception {
+        return roleDao.findOtherRoles(userId);
+    }
+
+    @Override
+    public void addRoleToUser(String[] ids, String userId) throws Exception {
+        for(String roleId : ids){
+            dao.addRoleToUser(roleId, userId);
+        }
     }
 }

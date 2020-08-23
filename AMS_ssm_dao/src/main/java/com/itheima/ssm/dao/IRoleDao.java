@@ -20,4 +20,7 @@ public interface IRoleDao {
 
     })
     public List<Role> findByUserId(String userId);
+
+    @Select("select * from role where id not in (select roleId from users_role where userId = #{userId})")
+    List<Role> findOtherRoles(String userId);
 }

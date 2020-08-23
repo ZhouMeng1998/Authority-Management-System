@@ -1,5 +1,6 @@
 package com.itheima.ssm.dao;
 
+import com.itheima.ssm.domain.Role;
 import com.itheima.ssm.domain.UserInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.security.core.userdetails.User;
@@ -38,4 +39,7 @@ public interface IUserDao {
             @Result(column = "id", property = "roles", javaType = java.util.List.class, many = @Many(select = "com.itheima.ssm.dao.IRoleDao.findByUserId"))
     })
     UserInfo findById(String id);
+
+    @Insert("insert into users_role(userId, roleId) values(#{userId}, #{roleId})")
+    void addRoleToUser(@Param("roleId")String roleId, @Param("userId") String userId);
 }
